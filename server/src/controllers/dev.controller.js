@@ -1,5 +1,7 @@
 const Post = require('../models/post');
 const User = require('../models/user');
+const Nft = require('../models/nft');
+const blockchain = require('../blockchain');
 
 module.exports = {
   devHome: (req, res) => {
@@ -29,7 +31,7 @@ module.exports = {
 
   devPost: async (req, res, next) => {
     try {
-      const posts = await Post.find({}).populate('writer', 'address nickname'); //find. 이후 populate('writer') => UserSchema 읽기 (구현 X)
+      const posts = await Post.find({}).populate('writer', 'address nickname'); //find. 이후 populate('writer') => UserSchema 읽기
       res.json(posts);
     } catch (err) {
       console.error(err);
@@ -39,7 +41,10 @@ module.exports = {
 
   devPostDetail: async (req, res, next) => {
     try {
-      const post = await Post.findById(req.params.postid); // id로 찾기 p
+      const post = await Post.findById(req.params.postid).populate(
+        'writer',
+        'address nickname'
+      ); // id로 찾기 p
       res.json(post);
     } catch (err) {
       console.error(err);
@@ -47,6 +52,58 @@ module.exports = {
     }
   },
 
-  devNft: (req, res) => {},
-  devNftDetail: (req, res) => {},
+  devNft: async (req, res, next) => {
+    try {
+      const nfts = await Nft.find({})
+        .populate('creator', 'address nickname')
+        .populate('owner', 'address nickname');
+      res.json(nfts);
+    } catch (err) {
+      console.error(err);
+      next(err);
+    }
+  },
+  devNftDetail: async (req, res, next) => {
+    try {
+      const nfts = await Nft.findById(req.params.tokenid)
+        .populate('creator', 'address nickname')
+        .populate('owner', 'address nickname');
+      res.json(nfts);
+    } catch (err) {
+      console.error(err);
+      next(err);
+    }
+  },
+
+  devSignUp: async (req, res, next) => {
+    console.log(req.body);
+    const { email, nickname, password } = req.body;
+
+    try {
+      let user = await User.findOne({ email });
+      if (user) {
+        return res.json({ errors: [{ msg: 'User already exists' }] }); // email 중복 확인
+      }
+
+      const address = await blockchain.createAccount();
+      console.log(address);
+
+      if (address) {
+        user = new User({
+          email,
+          nickname,
+          password,
+          address,
+        });
+
+        await user.save(); //db 저장
+        res.send('SignUp Successed.');
+      } else {
+        res.status('400').send('SignUp fail');
+      }
+    } catch (err) {
+      console.error(err.message);
+      next(err);
+    }
+  },
 };
