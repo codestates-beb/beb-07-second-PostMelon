@@ -1,29 +1,17 @@
+require('dotenv').config();
 const Web3 = require('web3');
+const web3J = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545'));
 
-//추후 production상태일 때 Infura로 바꿔줘야함
-const web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545'));
+const Web3Contract = require('web3-eth-contract');
 
-//서버 계정 설정하기
-async function setServerAccount() {
-  try {
-    const accounts = await web3.eth.getAccounts();
-    console.log(accounts);
-    return accounts[0];
-  } catch (e) {
-    console.error(e);
-  }
-}
+// ABI와 contract address 가져오기
+const tokenABI = require('./ABI/MyToken');
+const {TOKEN_CA} = process.env;
 
-async function createAccount(password) {
-  try {
-    const account = await web3.eth.personal.newAccount(password);
-    return account;
-  } catch (e) {
-    console.error(e);
-  }
-}
+Web3Contract.setProvider('http://127.0.0.1:7545');
+const tokenContract = new Web3Contract(tokenABI, TOKEN_CA);
 
-module.exports = {
-  setServerAccount,
-  createAccount,
+module.exports={
+  web3J,
+  tokenContract
 };
