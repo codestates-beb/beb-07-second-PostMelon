@@ -1,215 +1,164 @@
+
 import React from "react";
+import axios from 'axios';
+import { Link } from "react-router-dom";
 import Form from "../components/layout/SignupForm";
 
-// const Signup = (props) => {
-//   const [password, setPassword] = React.useState("");
-//   const [passwordConfirm, setPasswordConfirm] = React.useState("");
-//   const [phone, setPhone] = React.useState("");
-//   const [birth, setBirth] = React.useState("");
+const Signup = (goToHome) => {
 
-//   const [passwordMessage, setPasswordMessage] = React.useState("");
-//   const [passwordConfirmMessage, setPasswordConfirmMessage] = React.useState("");
-//   const [phoneMessage, setPhoneMessage] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [passwordConfirm, setPasswordConfirm] = React.useState("");
 
-//   const [isPassword, setIsPassword] = React.useState(false);
-//   const [isPasswordConfirm, setIsPasswordConfirm] = React.useState(false);
-//   const [isPhone, setIsPhone] = React.useState(false);
-//   const [isBirth, setIsBirth] = React.useState(false);
 
-//   const onChangePassword = (e) => {
-//     const currentPassword = e.target.value;
-//     setPassword(currentPassword);
+  const [passwordMessage, setPasswordMessage] = React.useState("");
+  const [passwordConfirmMessage, setPasswordConfirmMessage] = React.useState("");
 
-//     const passwordRegExp =
-//       /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
-//     if (!passwordRegExp.test(currentPassword)) {
-//       setPasswordMessage(
-//         "숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!"
-//       );
-//       setIsPassword(false);
-//     } else {
-//       setPasswordMessage("안전한 비밀번호 입니다.");
-//       setIsPassword(true);
-//     }
-//   };
+  const [isPassword, setIsPassword] = React.useState(false);
+  const [isPasswordConfirm, setIsPasswordConfirm] = React.useState(false);
 
-//   const onChangePasswordConfirm = (e) => {
-//     const currentPasswordConfirm = e.target.value;
-//     setPasswordConfirm(currentPasswordConfirm);
-//     if (password !== currentPasswordConfirm) {
-//       setPasswordConfirmMessage("떼잉~ 비밀번호가 똑같지 않아요!");
-//       setIsPasswordConfirm(false);
-//     } else {
-//       setPasswordConfirmMessage("똑같은 비밀번호를 입력했습니다.");
-//       setIsPasswordConfirm(true);
-//     }
-//   };
+  const onChangePassword = (e) => {
+    const currentPassword = e.target.value;
+    setPassword(currentPassword);
 
-//   const onChangePhone = (getNumber) => {
-//     const currentPhone = getNumber;
-//     setPhone(currentPhone);
-//     const phoneRegExp = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+    const passwordRegExp =
+      /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+    if (!passwordRegExp.test(currentPassword)) {
+      setPasswordMessage(
+        "숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!"
+      );
+      setIsPassword(false);
+    } else {
+      setPasswordMessage("안전한 비밀번호 입니다.");
+      setIsPassword(true);
+    }
+  };
 
-//     if (!phoneRegExp.test(currentPhone)) {
-//       setPhoneMessage("올바른 형식이 아닙니다!");
-//       setIsPhone(false);
-//     } else {
-//       setPhoneMessage("사용 가능한 번호입니다:-)");
-//       setIsPhone(true);
-//     }
-//   };
+  const onChangePasswordConfirm = (e) => {
+    const currentPasswordConfirm = e.target.value;
+    setPasswordConfirm(currentPasswordConfirm);
+    if (password !== currentPasswordConfirm) {
+      setPasswordConfirmMessage("비밀번호가 똑같지 않아요!");
+      setIsPasswordConfirm(false);
+    } else {
+      setPasswordConfirmMessage("똑같은 비밀번호를 입력했습니다.");
+      setIsPasswordConfirm(true);
+    }
+  };
 
-//   const addHyphen = (e) => {
-//     const currentNumber = e.target.value;
-//     setPhone(currentNumber);
-//     if (currentNumber.length === 3 || currentNumber.length === 8) {
-//       setPhone(currentNumber + "-");
-//       onChangePhone(currentNumber + "-");
-//     } else {
-//       onChangePhone(currentNumber);
-//     }
-//   };
 
-//   const onChangeBirth = (e) => {
-//     const currentBirth = e.target.value;
-//     setBirth(currentBirth);
-//     setIsBirth(true);
-//   };
-
-//   return (
-//     //style={{ width: "500px", margin: "0 auto"
-//     <div className="bg-yellow">
-//       <h3>Sign Up</h3>
-//       <div className="">
-//         <Form
-//           htmlFor="id"
-//           id="id"
-//           name="id"
-//           text="ID"
-//           sucessMsg="사용가능한 아이디 입니다."
-//           errorMsg="4-12사이 대소문자 또는 숫자만 입력해 주세요!"
-//           reg="0"
-//         />
-
-//         <Form
-//           htmlFor="name"
-//           id="name"
-//           name="name"
-//           text="Nick Name"
-//           sucessMsg="사용가능한 닉네임 입니다."
-//           errorMsg="닉네임은 2글자 이상 5글자 이하로 입력해주세요!"
-//         />
-
-//         {/* <Form
-//           htmlFor="password"
-//           id="password"
-//           name="password"
-//           text="Password"
-//           sucessMsg="안전한 비밀번호 입니다."
-//           errorMsg="숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!"
-//           reg="1"
-//         />
-//         <Form
-//           htmlFor="passwordConfirm"
-//           id="passwordConfirm"
-//           name="passwordConfirm"
-//           text="passwordConfirm"
-//           sucessMsg="떼잉~ 비밀번호가 똑같지 않아요!"
-//           errorMsg="똑같은 비밀번호를 입력했습니다."
-//         />  */}
-//         <div className="h-10 px-6 font-semibold rounded-md bg-black text-white mb-3">
-//           <label htmlFor="password">Password</label> <br />
-//           <input
-//             id="password"
-//             name="password"
-//             value={password}
-//             onChange={onChangePassword}
-//           />
-//           <p className="message">{passwordMessage}</p>
-//         </div>
-//         <div className="h-10 px-6 font-semibold rounded-md bg-black text-white mb-3">
-//           <label htmlFor="passwordConfirm">Password Confirm</label> <br />
-//           <input
-//             id="passwordConfirm"
-//             name="passwordConfirm"
-//             value={passwordConfirm}
-//             onChange={onChangePasswordConfirm}
-//           />
-//           <p className="message">{passwordConfirmMessage}</p>
-//         </div>
-//         <Form
-//           htmlFor="email"
-//           id="email"
-//           name="email"
-//           text="Email"
-//           sucessMsg="사용 가능한 이메일 입니다."
-//           errorMsg="이메일의 형식이 올바르지 않습니다!"
-//           reg="2"
-//         />
-
-//         <div className="h-10 px-6 font-semibold rounded-md bg-black text-white mb-3">
-//           <label htmlFor="phone">Phone</label> <br />
-//           <input id="phone" name="phone" value={phone} onChange={addHyphen} />
-//           <p className="message">{phoneMessage}</p>
-//         </div>
-
-//         <div className="bg-black">
-//           <label htmlFor="birth">Birth</label> <br />
-//           <input
-//             type="date"
-//             id="birth"
-//             name="birth"
-//             value={birth}
-//             onChange={onChangeBirth}
-//           />
-//         </div>
-//         <br />
-//         <br />
-
-//         <button
-//           className="h-10 px-6 font-semibold rounded-md bg-black text-white mb-3"
-//           type="submit"
-//           disabled={
-//             isPassword === true &&
-//             isPasswordConfirm === true &&
-//             isPhone === true &&
-//             isBirth === true
-//               ? false
-//               : true
-//           }
-//         >
-//           Submit
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-const Signup = () => {
   return (
-    <div className="join">
-      <div className="join-inner w-1/3 h-[737px] mx-auto mt-[46px] pt-[60px]">
-        <div className="join-content w-[80%] mx-auto flex flex-col items-center">
-          <div className="welcome text-[40px] font-bold mb-[50px]">
-            Welcome
-          </div>
-
-          <form className="w-[100%] flex flex-col items-center">
-            <input
-              className="h-14 w-[100%] rounded-lg bg-gray-light pl-6 text-gray-dark focus:outline-none"
-              placeholder="input post name or content"
-            ></input>
-            <input className="nickname w-[100%] h-14 rounded-lg mb-[80px] bg-gray-light focus:outline-none" placeholder="input post name or content"></input>
-            <input className="email w-[100%] mb-[80px] border-2" placeholder="input post name or content"></input>
-            <input className="password w-[100%] border-2" placeholder="input post name or content"></input>
-          
-            <button className="submit w-2/3 mx-auto bg-black text-white h-[40px] ">join</button>
-
-          </form>
+    <div className="container px-5 py-24 mx-auto">
+      <div className="lg:w-1/2 md:w-2/3 mx-auto">
+        <div className="bg-gray text-center sm:text-3xl text-2xl font-medium title-font mb-4 rounded-lg">
+          Welcome
+          <div className="p-2 w-full">
+            <div className="relative">
+              <Form
+                htmlFor="name"
+                id="name"
+                name="name"
+                sucessMsg="사용가능한 닉네임 입니다."
+                errorMsg="닉네임은 2글자 이상 5글자 이하로 입력해주세요!"
+                />
+            </div>
+            <div className="p-2 w-full">
+              <div className="relative">
+                <label htmlFor="password"></label>
+                  <input
+                    className="rounded-lg"
+                    id="password"
+                    name="password"
+                    placeholder="password"
+                    value={password}
+                    onChange={onChangePassword}
+                  />
+                  <p className="text-sm mt-2">{passwordMessage}</p>
+              </div>
+            </div>
+            <div className="p-2 w-full">
+              <div className="relative">
+              <label htmlFor="passwordConfirm"></label>
+                <input
+                  className="rounded-lg"
+                  id="passwordConfirm"
+                  name="passwordConfirm"
+                  placeholder="passwordConfirm"
+                  value={passwordConfirm}
+                  onChange={onChangePasswordConfirm}
+                  />
+                  <p className="text-sm mt-2">{passwordConfirmMessage}</p>
+              </div>
+            </div>
+            <div className="p-2 w-full">
+            <Form
+              htmlFor="email"
+              id="email"
+              name="E-mail"
+              sucessMsg="사용 가능한 이메일 입니다."
+              errorMsg="이메일의 형식이 올바르지 않습니다!"
+              reg="2"
+              />
+            </div>
+            <div className="p-2 w-full">
+              <div className="relative">
+                <button
+                  className="text-white bg-black border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                  type="submit"
+                  disabled={
+                  isPassword === true &&
+                  isPasswordConfirm === true 
+                  ? false
+                  : true
+                  }
+                  onClick={(e) => {
+                    if (isPassword === true &&
+                      isPasswordConfirm === true ) {
+                    return goToHome();
+                    } else {
+                      return false;
+                    }
+                    }}
+                  >
+                  Join
+                  </button>
+              </div>
+            </div>
         </div>
+       </div>
       </div>
-    </div>
-  )
-}
+    </div> 
+
+
+    
+  );
+};
 
 export default Signup;
+// const Signup = () => {
+//   return (
+//     <div className="join">
+//       <div className="join-inner w-1/3 h-[737px] mx-auto mt-[46px] pt-[60px]">
+//         <div className="join-content w-[80%] mx-auto flex flex-col items-center">
+//           <div className="welcome text-[40px] font-bold mb-[50px]">
+//             Welcome
+//           </div>
+
+//           <form className="w-[100%] flex flex-col items-center">
+//             <input
+//               className="h-14 w-[100%] rounded-lg bg-gray-light pl-6 text-gray-dark focus:outline-none"
+//               placeholder="input post name or content"
+//             ></input>
+//             <input className="nickname w-[100%] h-14 rounded-lg mb-[80px] bg-gray-light focus:outline-none" placeholder="input post name or content"></input>
+//             <input className="email w-[100%] mb-[80px] border-2" placeholder="input post name or content"></input>
+//             <input className="password w-[100%] border-2" placeholder="input post name or content"></input>
+          
+//             <button className="submit w-2/3 mx-auto bg-black text-white h-[40px] ">join</button>
+
+//           </form>
+//         </div>
+//       </div>
+//     </div>
+//   )
+// }
+
+// export default Signup;
