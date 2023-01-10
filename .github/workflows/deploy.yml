@@ -5,7 +5,8 @@ on:
       - main
       - dev
     paths:
-      - client
+      - client/src/**
+  workflow_dispatch:
 
 jobs:
   build:
@@ -17,6 +18,8 @@ jobs:
     steps:
       - name: checkout code
         uses: actions/checkout@v3.3.0
+        with:
+          node-version: 16
 
       - name: cache dependency
         uses: actions/cache@v3.2.3
