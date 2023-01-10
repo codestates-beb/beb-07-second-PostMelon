@@ -49,7 +49,7 @@ module.exports = {
     }
   },
 
-  sendToken: async(req, res)=> {
+  sendToken: async(req, res)=> { // 수정필요
     const{fromAddress, toAddress, password , value} = req.body;
     try{
       const balance = getBalance(fromAddress);
