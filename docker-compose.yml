@@ -8,6 +8,8 @@ services:
       - "7545:7545"
     extra_hosts:
       - host.docker.internal:host-gateway
+    volumes:
+      - "./key:/app/key"
 
   truffle:
     depends_on:
@@ -32,3 +34,4 @@ services:
       - host.docker.internal:host-gateway
     volumes:
       - "./truffle_build/contracts:/usr/src/app/src/blockchain/ABI/contract_json"
+      - "./key:/usr/src/app/src/config/key"

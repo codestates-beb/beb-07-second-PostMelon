@@ -14,6 +14,10 @@ yarn-error.log*
 /jspm_packages
 /bower_components
 
+#docker
+key
+truffle_build
+
 # Yarn Integrity file
 .yarn-integrity
 
