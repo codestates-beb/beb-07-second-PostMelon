@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <div className="header relative h-64 pt-[80px]">
       <div className="logo absolute top-[30.27%] left-[4.84%] h-[119px] w-[153px] text-5xl font-normal">
-        Post Melon
+        <Link to="/">Post Melon</Link>
       </div>
       <div className="sub-menu mx-auto mb-3 w-[52%]">
         <div className="search relative mx-auto mb-[33px] h-16 w-3/4 rounded-lg bg-gray-light drop-shadow-md">
@@ -19,7 +19,7 @@ const Header = () => {
         </div>
         <ul className="category flex w-full justify-center whitespace-nowrap">
           <li>
-            <Link to="/list" className="category-item">
+            <Link to="/post" className="category-item">
               List
             </Link>
           </li>
