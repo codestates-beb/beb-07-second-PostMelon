@@ -1,11 +1,21 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const ethUtil = require('../blockchain/eth');
+const {getBalance} = require('../blockchain/token');
+const { web3J,tokenContract,privateKey } = require('../blockchain');
 
 module.exports = {
-  getAllUser: (req, res) => {
-    res.send('user page');
+  getAllUser: async (req, res) => {
+    try {
+      const users = await User.find({}); // user 컬렉션 모두 가져오기
+
+      res.json(users);
+    } catch (err) {
+      console.error(err);
+      next(err);
+    }
   },
+  
   getEth: async (req, res) => {
 
     //로그인 검증
@@ -41,6 +51,30 @@ module.exports = {
       //로그인 안돼있거나 문제가 생겼을 경우
       console.error(err);
       return res.status(500).json("fail");
+    }
+  },
+
+  sendToken: async(req, res)=> {
+    const{fromAddress, toAddress, value} = req.body;
+    try{
+      const balance = getBalance(fromAddress);
+      if(value>parseInt(balance)){
+        res.json({messgae: "not enough token"})
+      }else{
+        web3J.eth.personal.unlockAccount(fromAddress, privateKey)
+        await tokenContract.methods
+        .transfer(toAddress, value)
+        .send({
+          from: fromAddress,
+          gasprice : 100,
+          gas: process.env.GAS
+        }, (err, result) => {
+          return res.status(200).json({message : 'success send token'})
+        })
+      }
+    }catch(err){
+      console.error(err)
+      return res.status(500).json("fail")
     }
   }
 };

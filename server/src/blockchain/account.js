@@ -4,6 +4,7 @@ const {web3J} = require('./');
 async function createAccount(password) {
   try {
     const account = await web3J.eth.personal.newAccount(password);
+  
     return account;
   } catch (e) {
     console.error(e);
