@@ -7,7 +7,6 @@ const Web3Contract = require('web3-eth-contract');
 // ABI와 contract address 가져오기
 const tokenABI = require('./ABI/MyToken');
 const {TOKEN_CA} = process.env;
-const privateKey = '0x1029384756';
 
 Web3Contract.setProvider('http://127.0.0.1:7545');
 const tokenContract = new Web3Contract(tokenABI, TOKEN_CA);
@@ -15,5 +14,5 @@ const tokenContract = new Web3Contract(tokenABI, TOKEN_CA);
 module.exports={
   web3J,
   tokenContract,
-  privateKey
+
 };
