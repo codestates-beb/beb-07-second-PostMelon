@@ -33,5 +33,5 @@ services:
     extra_hosts:
       - host.docker.internal:host-gateway
     volumes:
-      - "./truffle_build/contracts:/usr/src/app/src/blockchain/ABI/contract_json"
+      - "./truffle_build/contracts:/usr/src/app/src/blockchain/contract_json"
       - "./key:/usr/src/app/src/config/key"

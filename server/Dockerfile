@@ -9,6 +9,8 @@ RUN npm i
 
 COPY . .
 
+RUN ["chmod", "+x", "/usr/src/app/setting.sh"]
+
 EXPOSE 443
 
-CMD ["npm", "run", "server"]
+ENTRYPOINT ["/usr/src/app/setting.sh"]
