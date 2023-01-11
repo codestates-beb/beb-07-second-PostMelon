@@ -1,6 +1,6 @@
 const accountUtil = require('../blockchain/account');
 const User = require('../models/user');
-const {privateKey} = require('../blockchain')
+
 module.exports = {
   signUp: async (req, res, next) => {
     // console.log(req.body);
@@ -12,7 +12,7 @@ module.exports = {
         return res.json({ errors: [{ msg: 'User already exists' }] }); // email 중복 확인
       }
 
-      const address = await accountUtil.createAccount(privateKey);
+      const address = await accountUtil.createAccount(password);
       // console.log(address);
 
       if (address) {

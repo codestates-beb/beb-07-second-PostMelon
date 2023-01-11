@@ -2,12 +2,12 @@ const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const ethUtil = require('../blockchain/eth');
 const {getBalance} = require('../blockchain/token');
-const { web3J,tokenContract,privateKey } = require('../blockchain');
+const { web3J,tokenContract } = require('../blockchain');
 
 module.exports = {
   getAllUser: async (req, res) => {
     try {
-      const users = await User.find({}); // user 컬렉션 모두 가져오기
+      const users = await User.find({}).populate('created_posts', 'title content' ); // user 컬렉션 모두 가져오기 , objectId로만 나오니 Populate하기
 
       res.json(users);
     } catch (err) {
@@ -55,13 +55,13 @@ module.exports = {
   },
 
   sendToken: async(req, res)=> {
-    const{fromAddress, toAddress, value} = req.body;
+    const{fromAddress, toAddress, password, value} = req.body; // password
     try{
       const balance = getBalance(fromAddress);
       if(value>parseInt(balance)){
         res.json({messgae: "not enough token"})
       }else{
-        web3J.eth.personal.unlockAccount(fromAddress, privateKey)
+        web3J.eth.personal.unlockAccount(fromAddress, password)
         await tokenContract.methods
         .transfer(toAddress, value)
         .send({
