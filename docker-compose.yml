@@ -1,0 +1,16 @@
+services:
+  ganache:
+    build: "./contract"
+    container_name: "ganache_truffle"
+    restart: "always"
+    ports:
+      - "7545:7545"
+
+  node:
+    build: "./server"
+    restart: "always"
+    container_name: "melon_node"
+    ports:
+      - "443:443"
+    depends_on:
+      - ganache
