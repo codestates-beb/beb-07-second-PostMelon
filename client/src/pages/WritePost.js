@@ -3,190 +3,108 @@ import { Link } from "react-router-dom";
 const WritePost = () => {
   return (
     <div
-      className="background-color:#eaeaea;
-  height:744px;
-  width:1108px;"
+      className="mx-auto
+  h-[805px] w-[1108px]
+  bg-gray-light"
     >
-      <div
-        className="background-color:#eaeaea;
-height:177px;
-width:1108px;"
-      >
-        <div
-          className="background-color:#eaeaea;
-height:99px;
-width:1108px;"
-        >
+      <div className="mx-auto h-[177px] w-[1108px] bg-gray-light pt-[60px]">
+        <div className="mx-auto h-[99px] w-[1108px] bg-gray-light">
           <div
-            className="color:#595858;
-text-align:left;
-vertical-align:text-top;
-font-size:32px;
-font-family:Inter;
-line-height:auto;
-width:67px;"
+            className="text-center
+text-[32px]
+font-semibold
+text-gray"
           >
             Title
           </div>
+        </div>
+        <div
+          className="
+ post-info flex h-[15px] w-[1108px] justify-end p-[40px]
+"
+        >
           <div
-            className="height:78px;
-width:1108px;
-padding:0px;"
+            className="
+         
+mr-[150px]
+text-[24px]
+text-gray
+"
+          >
+            date
+          </div>
+          <div
+            className="
+
+text-[24px]
+text-gray 
+"
+          >
+            writer
+          </div>
+        </div>
+
+        <div
+          className="
+h-[373px]
+w-[1108px]
+p-[40px]"
+        >
+          <div
+            className="
+text-[24px]
+text-gray"
+          >
+            Contents
+          </div>
+        </div>
+        <div
+          className="
+
+h-[194px]
+w-[1108px] border-2 border-solid border-gray p-[30px]
+"
+        >
+          <div
+            className="h-[29px]
+w-[35px]"
           >
             <div
-              className="background-color:#eaeaea;
-height:78px;
-width:1108px;"
+              className="
+text-[20px]
+text-gray"
             >
-              <div
-                className="height:29px;
-width:54px;
-padding:0px;
-left:827px;
-top:24px;
-position:relative;"
-              >
-                <div
-                  className="color:#595858;
-text-align:left;
-vertical-align:text-top;
-font-size:24px;
-font-family:Inter;
-line-height:auto;
-width:54px;"
-                >
-                  date
-                </div>
-                <div
-                  className="height:29px;
-width:69px;
-padding:0px;
-left:969px;
-top:24px;
-position:relative;"
-                >
-                  <div
-                    className="color:#595858;
-text-align:left;
-vertical-align:text-top;
-font-size:24px;
-font-family:Inter;
-line-height:auto;
-width:69px;"
-                  >
-                    wr
-                  </div>
-                  writer
-                </div>
-                <div
-                  className="height:373px;
-width:1108px;
-padding:0px;
-position:absolute;"
-                >
-                  <div
-                    className="color:#595858;
-text-align:left;
-vertical-align:text-top;
-font-size:24px;
-font-family:Inter;
-line-height:auto;
-left:133px;
-top:164px;
-position:absolute;
-width:104px;"
-                  >
-                    Contents
-                  </div>
-                  <div
-                    className="height:29.15576171875px;
-width:32.40601348876953px;
-padding:0px;
-left:988px;
-top:307px;
-position:relative;"
-                  >
-                    <div
-                      className="width:32.40601348876953px;
-height:29.15576171875px;"
-                    >
-                      <div
-                        className="height:29.15576171875px;
-width:32.40601348876953px;
-width:32.40601348876953px;
-height:29.15576171875px;"
-                      >
-                        <div
-                          className="height:194px;
-width:1108px;
-padding:0px;
-top:550px;
-position:relative;"
-                        >
-                          <div
-                            className="color:#595858;
-text-align:left;
-vertical-align:text-top;
-font-size:20px;
-font-family:Inter;
-line-height:auto;
-width:77px;"
-                          >
-                            Coment
-                          </div>
-                          <div
-                            className="height:74px;
-width:1039px;
-padding:0px;
-top:42px;
-position:relative;"
-                          >
-                            <div
-                              className="background-color:#eaeaea;
-height:194px;
-width:1108px;
-border:1px solid #595858;"
-                            >
-                              <div
-                                className="height:31px;
-width:85px;
-padding:0px;
-left:969px;
-top:145px;
-position:relative;"
-                              >
-                                <div
-                                  className="background-color:#030303;
-height:31px;
-width:85px;
-filter:drop-shadow(0px 4px 4px rgba(0,0,0,0.25));
-border-radius:5px;"
-                                >
-                                  <div
-                                    className="color:#ffffff;
-text-align:left;
-vertical-align:text-top;
-font-size:16px;
-font-family:Inter;
-line-height:auto;
-top:6px;
-left:30px;
-position:absolute;
-width:24px;"
-                                  >
-                                    OK
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              Coment
             </div>
+          </div>
+          <div
+            className="h-[80px]
+w-[1045px]
+rounded
+bg-gray bg-opacity-25
+p-[10px]"
+          ></div>
+
+          <div
+            className="h-[20px]
+w-[1039px]
+p-[10px]
+"
+          >
+            <button
+              className="
+
+
+container
+w-[60px] rounded
+bg-black
+text-center
+text-[16px]
+text-white
+md:ml-[950px]"
+            >
+              OK
+            </button>
           </div>
         </div>
       </div>
