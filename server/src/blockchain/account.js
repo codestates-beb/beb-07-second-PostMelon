@@ -1,9 +1,22 @@
-const {web3J} = require('./');
+const { web3J } = require('./');
+
+//환경변수 세팅
+async function setServerAccount() {
+  try {
+    const accounts = await web3J.eth.getAccounts();
+    process.env.SERVER_ACC = accounts[0];
+
+    return process.env.SERVER_ACC;
+  } catch (e) {
+    console.error(e);
+  }
+}
 
 //계정 생성
 async function createAccount(password) {
   try {
     const account = await web3J.eth.personal.newAccount(password);
+
     return account;
   } catch (e) {
     console.error(e);
@@ -12,4 +25,5 @@ async function createAccount(password) {
 
 module.exports = {
   createAccount,
-}
+  setServerAccount,
+};

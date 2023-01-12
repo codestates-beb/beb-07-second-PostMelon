@@ -12,7 +12,7 @@ module.exports = {
         return res.json({ errors: [{ msg: 'User already exists' }] }); // email 중복 확인
       }
 
-      const address = await accountUtil.createAccount();
+      const address = await accountUtil.createAccount(password);
       // console.log(address);
 
       if (address) {

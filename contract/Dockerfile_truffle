@@ -1,0 +1,19 @@
+#truffle
+FROM node:16
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm i
+# RUN apk add --no-cache --upgrade bash
+
+COPY truffle-config.js ./
+COPY contracts ./contracts
+COPY migrations ./migrations
+COPY test ./test
+COPY setting.sh ./
+
+RUN ["chmod", "+x", "/app/setting.sh"]
+
+ENTRYPOINT ["/app/setting.sh"] 

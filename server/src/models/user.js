@@ -11,11 +11,11 @@ const userSchema = new mongoose.Schema({
   token_amount: { type: Number, default: 0 },
   eth_amount: { type: Number, default: 0 },
   created_at: { type: Date, default: Date.now, required: true },
-  created_posts: { type: [ObjectId], default: [] },
+  created_posts: { type: [ObjectId], default: [], ref : 'Post' },
   favorited_posts: { type: [ObjectId], default: [] },
-  collected_nfts: { type: [ObjectId], default: [] },
+  collected_nfts: { type: [ObjectId], default: [], ref : 'Nft' },
   favorited_nfts: { type: [ObjectId], default: [] },
-  created_nfts: { type: [ObjectId], default: [] },
+  created_nfts: { type: [ObjectId], default: [], ref : 'Nft'},
 });
 
 userSchema.pre('save', async function (next) {
