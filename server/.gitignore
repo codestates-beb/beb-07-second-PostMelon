@@ -30,6 +30,7 @@ build/
 
 #https
 /src/config/secure/key.pem
+/src/config/secure/cert.pem
 
 # Serverless generated files
 .serverless/

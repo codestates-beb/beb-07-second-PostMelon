@@ -1,7 +1,15 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { loginAPI } from "apis/loginAPI";
 
 const Login = () => {
+
+  async function loginButton() {
+    const data = await loginAPI('codestate', 'qwe12345');
+
+    console.log(data);
+  }
+
   //서버와 연결전 테스트용 더미데이터
   const realId = "postmelon@naver.com";
   const realPw = "12345678";
@@ -70,7 +78,7 @@ const Login = () => {
                       }
                       }}
                       >
-                      Login
+
                   </button>
                 </div>
               </div>

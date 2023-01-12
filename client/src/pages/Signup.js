@@ -1,14 +1,15 @@
 
 import React from "react";
-import axios from 'axios';
-import { Link } from "react-router-dom";
 import Form from "../components/layout/SignupForm";
+import { signupAPI } from "apis/signupAPI";
 
-const Signup = (goToHome) => {
+const Signup = (props) => {
 
   const [password, setPassword] = React.useState("");
   const [passwordConfirm, setPasswordConfirm] = React.useState("");
 
+  const [nickname, setNickname] = React.useState("");
+  const [email, setEmail] = React.useState(""); 
 
   const [passwordMessage, setPasswordMessage] = React.useState("");
   const [passwordConfirmMessage, setPasswordConfirmMessage] = React.useState("");
@@ -45,6 +46,24 @@ const Signup = (goToHome) => {
     }
   };
 
+  const onClickSignup = async (e) => {
+    if (isPassword === true &&
+      isPasswordConfirm === true ) {
+      const result = await signupAPI(email,nickname, password )
+      console.log(result)
+      }
+  }
+
+  const nickNameChange = (name) => {
+    console.log(name)
+    setNickname(name)
+  }
+  const emailChange = (email) => {
+    console.log(email)
+    setEmail(email)
+  }
+
+
 
   return (
     <div className="container px-5 py-24 mx-auto">
@@ -54,6 +73,7 @@ const Signup = (goToHome) => {
           <div className="p-2 w-full">
             <div className="relative">
               <Form
+                nickNameChange={nickNameChange}
                 htmlFor="name"
                 id="name"
                 name="name"
@@ -91,13 +111,15 @@ const Signup = (goToHome) => {
             </div>
             <div className="p-2 w-full">
             <Form
+              emailChange={emailChange}
               htmlFor="email"
               id="email"
-              name="E-mail"
+              name="email"
               sucessMsg="사용 가능한 이메일 입니다."
               errorMsg="이메일의 형식이 올바르지 않습니다!"
               reg="2"
               />
+              <p className="text-sm mt-2">{passwordConfirmMessage}</p>
             </div>
             <div className="p-2 w-full">
               <div className="relative">
@@ -110,14 +132,7 @@ const Signup = (goToHome) => {
                   ? false
                   : true
                   }
-                  onClick={(e) => {
-                    if (isPassword === true &&
-                      isPasswordConfirm === true ) {
-                    return goToHome();
-                    } else {
-                      return false;
-                    }
-                    }}
+                  onClick={onClickSignup}
                   >
                   Join
                   </button>
