@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "console": "truffle console --network docker_ganache",
+    "migrate": "truffle migrate --network docker_ganache"
+  },
   "dependencies": {
     "@openzeppelin/contracts": "^4.8.0",
     "chai": "^4.3.7",

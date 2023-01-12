@@ -1,6 +1,12 @@
 //import
 const express = require('express');
 require('dotenv').config();
+const accountUtil = require('./blockchain/account');
+
+//환경변수 세팅
+if (process.env.DOCKER == 'true') {
+  accountUtil.setServerAccount().then((res) => console.log(res));
+}
 
 //middleware import
 const cors = require('cors');

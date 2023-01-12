@@ -1,4 +1,4 @@
 module.exports = {
-  myNftAbi: require('./MyNft'),
+  // myNftAbi: require('./MyNft'),
   myTokenAbi: require('./MyToken'),
 };
