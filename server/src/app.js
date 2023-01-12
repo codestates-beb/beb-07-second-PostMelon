@@ -5,7 +5,9 @@ const accountUtil = require('./blockchain/account');
 
 //환경변수 세팅
 if (process.env.DOCKER == 'true') {
-  accountUtil.setServerAccount().then((res) => console.log(res));
+  accountUtil
+    .setServerAccount()
+    .then((res) => console.log(`server_account : ${res}`));
 }
 
 //middleware import
