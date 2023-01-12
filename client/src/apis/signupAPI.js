@@ -5,10 +5,11 @@ const server = "https://127.0.0.1:443";
 async function signupAPI(email, nickname, password) {
   try {
     const res = await axios.post(`${server}/signup`, {
-        email,
-        nickname, 
-        password 
+      email,
+      nickname,
+      password,
     });
+
     return res;
   } catch (error) {
     throw new Error(error);

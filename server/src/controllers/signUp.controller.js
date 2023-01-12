@@ -13,7 +13,6 @@ module.exports = {
       }
 
       const address = await accountUtil.createAccount(password);
-      // console.log(address);
 
       if (address) {
         user = new User({

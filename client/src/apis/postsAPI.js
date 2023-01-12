@@ -4,11 +4,30 @@ const server = "https://127.0.0.1:443";
 
 async function getAllPosts() {
   try {
-    const res = await axios.get(`${server}/dev/post`);
+    const res = await axios.get(`${server}/post`);
     return res;
   } catch (error) {
-    throw new Error(error);
+    console.log(error);
   }
 }
 
-export { getAllPosts };
+async function writePost(title, content, writer, accessToken) {
+  try {
+    const res = await axios.post(
+      `${server}/post/write`,
+      {
+        title,
+        content,
+        writer,
+      },
+      {
+        headers: { authorization: `Bearer ${accessToken}` },
+      }
+    );
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export { getAllPosts, writePost };

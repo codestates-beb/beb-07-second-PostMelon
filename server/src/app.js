@@ -35,7 +35,7 @@ app.use('/signup', router.signUpRouter);
 app.use('/login', router.loginRouter);
 app.use('/post', router.postRouter);
 app.use('/nft', router.nftRouter);
-app.use('/', (req, res) => {
+app.get('/', (req, res) => {
   res.send('hello!');
 });
 
