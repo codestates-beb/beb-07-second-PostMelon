@@ -4,7 +4,7 @@ import React, { useState } from "react";
 export default function Form(props) {
   const [val, setVal] = useState("");
   const [message, setMessage] = useState("");
-  const [valid, setValid] = useState(false);
+  //const [valid, setValid] = useState(false);
 
   const list = [
     /^[a-zA-z0-9]{4,12}$/, //id
@@ -18,27 +18,21 @@ export default function Form(props) {
     const name = e.target.name;
     setVal(val);
 
-    // 유효성 검사
-    if (name === "id" || name === "email") {
-      const RegExp = list[props.reg];
-      const validTest = RegExp.test(val);
-      if (!validTest) {
-        setMessage(props.errorMsg);
-        setValid(false);
-      } else {
-        setMessage(props.sucessMsg);
-        setValid(true);
-      }
-    }
+  
 
     // 갯수 검사
+    if (name === "email") {
+      props.emailChange(val)
+    }
+
     if (name === "name") {
+      props.nickNameChange(val)
       if (val.length < 2 || val.length > 5) {
         setMessage(props.errorMsg);
-        setValid(false);
+        //setValid(false);
       } else {
         setMessage(props.sucessMsg);
-        setValid(true);
+        //setValid(true);
       }
     }
   };
