@@ -1,9 +1,6 @@
 const { web3J, tokenContract } = require('./');
 // console.log(tokenContract.methods);
 
-//환경변수 가져오기
-const { SERVER_ACC, SERVER_PK, POST_TOKEN_AMOUNT, TOKEN_CA, GAS } = process.env;
-
 //토큰 잔액 확인
 async function getBalance(account) {
   try {
@@ -17,6 +14,9 @@ async function getBalance(account) {
 
 //게시글 작성 시 토큰 전송
 async function givePostToken(account) {
+  const { SERVER_ACC, SERVER_PK, POST_TOKEN_AMOUNT, TOKEN_CA, GAS } =
+    process.env;
+
   try {
     console.log(`${process.env.SERVER_ACC}test`);
     console.log(`${process.env.SERVER_PK}test`);
