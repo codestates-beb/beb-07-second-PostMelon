@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 
 export default function Form(props) {
@@ -45,12 +46,12 @@ export default function Form(props) {
   // style={{ marginBottom: "10px" }}
 
   return (
-    <div className="h-10 px-6 font-semibold rounded-md bg-black text-white mb-3">
-      <label htmlFor={props.htmlFor} style={{ marginRight: "10px" }}>
+    <div className="">
+      <label htmlFor={props.htmlFor}>
         {props.text}
       </label>
-      <input id={props.id} name={props.name} value={val} onChange={onChange} />
-      <p className=""> {message} </p>
+      <input className="rounded-lg" id={props.id} name={props.name} value={val} onChange={onChange} placeholder={props.name} />
+      <p className="text-sm mt-2"> {message} </p>
     </div>
   );
 }

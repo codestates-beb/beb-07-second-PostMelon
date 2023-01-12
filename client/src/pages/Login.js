@@ -24,13 +24,13 @@ const Login = () => {
   return (
     <div className="container px-5 py-24 mx-auto">
       <div className="lg:w-1/2 md:w-2/3 mx-auto">
-        <div className="flex flex-wrap -m-2">
-          <div className="p-2 w-1/2">
-            <div className="relative">
+        <div className="bg-gray mx-auto">
+          <div className="p-2 w-full">
+            <div className="relative ml-52 mt-6">
               <input
-              placeholder="사용자 이름 또는 이메일"
+              placeholder="이메일"
               id="id"
-              className="h-12 rounded-md relative bg-black px-6 font-semibold text-white"
+              className="h-12 rounded-md bg-white px-6 font-semibold text-black"
               onChange={(e) => {
               setId(e.target.value);
               }}
@@ -39,13 +39,13 @@ const Login = () => {
 
             </div>
           </div>
-              <div className="p-2 w-full">
-                <div className="relative">
+              <div className="p-2 w-full mx-auto">
+                <div className="relative ml-52">
                   <input
                     type="password"
                     placeholder="비밀번호"
                     id="password"
-                    className="h-12 rounded-md bg-black px-6 font-semibold text-white"
+                    className="h-12 rounded-md bg-white px-6 font-semibold text-black"
                     onChange={(e) => {
                     setPw(e.target.value);
                     }}
@@ -54,10 +54,10 @@ const Login = () => {
                 </div>
               </div>
               <div className="p-2 w-full">
-                <div className="relative">
+                <div className="relative ml-52">
                   <button
                     type="button"
-                    className="ml-16 mx-auto text-white bg-black border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                    className="ml-16 mx-auto flex text-white bg-black border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
                     disabled={button}
                     onClick={(e) => {
                       if (realId === id) {
@@ -74,7 +74,7 @@ const Login = () => {
                   </button>
                 </div>
               </div>
-              <div className="p-2 w-1/2 ml-24">
+              <div className="p-2 w-1/2 ml-72">
               <Link to="/signup">회원가입</Link>
               </div>
         </div>
