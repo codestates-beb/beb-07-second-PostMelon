@@ -3,7 +3,7 @@ services:
     build:
       context: "./contract"
       dockerfile: "Dockerfile_ganache"
-    container_name: "ganache_cli"
+    container_name: "ganache"
     ports:
       - "7545:7545"
     extra_hosts:
@@ -17,17 +17,19 @@ services:
     build:
       context: "./contract"
       dockerfile: "Dockerfile_truffle"
-    container_name: "truffle_migrate"
+    container_name: "truffle"
     extra_hosts:
       - host.docker.internal:host-gateway
     volumes:
       - "./truffle_build:/app/build"
+    ports:
+      - "4005:4005"
 
   node:
     depends_on:
       - truffle
     build: "./server"
-    container_name: "melon_node"
+    container_name: "node"
     ports:
       - "443:443"
     extra_hosts:
@@ -35,3 +37,4 @@ services:
     volumes:
       - "./truffle_build/contracts:/usr/src/app/src/blockchain/contract_json"
       - "./key:/usr/src/app/src/config/key"
+    restart: always

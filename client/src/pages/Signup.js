@@ -1,18 +1,20 @@
-
 import React from "react";
 import Form from "../components/layout/SignupForm";
 import { signupAPI } from "apis/signupAPI";
+import { useNavigate } from "react-router-dom";
 
 const Signup = (props) => {
+  const navigate = useNavigate();
 
   const [password, setPassword] = React.useState("");
   const [passwordConfirm, setPasswordConfirm] = React.useState("");
 
   const [nickname, setNickname] = React.useState("");
-  const [email, setEmail] = React.useState(""); 
+  const [email, setEmail] = React.useState("");
 
   const [passwordMessage, setPasswordMessage] = React.useState("");
-  const [passwordConfirmMessage, setPasswordConfirmMessage] = React.useState("");
+  const [passwordConfirmMessage, setPasswordConfirmMessage] =
+    React.useState("");
 
   const [isPassword, setIsPassword] = React.useState(false);
   const [isPasswordConfirm, setIsPasswordConfirm] = React.useState(false);
@@ -47,30 +49,32 @@ const Signup = (props) => {
   };
 
   const onClickSignup = async (e) => {
-    if (isPassword === true &&
-      isPasswordConfirm === true ) {
-      const result = await signupAPI(email,nickname, password )
-      console.log(result)
+    if (isPassword === true && isPasswordConfirm === true) {
+      const result = await signupAPI(email, nickname, password);
+      if (result.data) {
+        alert("signup success!!");
+        navigate("/login");
+      } else {
+        alert("signup error");
       }
-  }
+
+      console.log(result);
+    }
+  };
 
   const nickNameChange = (name) => {
-    console.log(name)
-    setNickname(name)
-  }
+    setNickname(name);
+  };
   const emailChange = (email) => {
-    console.log(email)
-    setEmail(email)
-  }
-
-
+    setEmail(email);
+  };
 
   return (
-    <div className="container px-5 py-24 mx-auto">
-      <div className="lg:w-1/2 md:w-2/3 mx-auto">
-        <div className="bg-gray text-center sm:text-3xl text-2xl font-medium title-font mb-4 rounded-lg">
+    <div className="container mx-auto px-5 py-24">
+      <div className="mx-auto md:w-2/3 lg:w-1/2">
+        <div className="title-font mb-4 rounded-lg bg-gray text-center text-2xl font-medium sm:text-3xl">
           Welcome
-          <div className="p-2 w-full">
+          <div className="w-full p-2">
             <div className="relative">
               <Form
                 nickNameChange={nickNameChange}
@@ -79,25 +83,25 @@ const Signup = (props) => {
                 name="name"
                 sucessMsg="사용가능한 닉네임 입니다."
                 errorMsg="닉네임은 2글자 이상 5글자 이하로 입력해주세요!"
-                />
+              />
             </div>
-            <div className="p-2 w-full">
+            <div className="w-full p-2">
               <div className="relative">
                 <label htmlFor="password"></label>
-                  <input
-                    className="rounded-lg"
-                    id="password"
-                    name="password"
-                    placeholder="password"
-                    value={password}
-                    onChange={onChangePassword}
-                  />
-                  <p className="text-sm mt-2">{passwordMessage}</p>
+                <input
+                  className="rounded-lg"
+                  id="password"
+                  name="password"
+                  placeholder="password"
+                  value={password}
+                  onChange={onChangePassword}
+                />
+                <p className="mt-2 text-sm">{passwordMessage}</p>
               </div>
             </div>
-            <div className="p-2 w-full">
+            <div className="w-full p-2">
               <div className="relative">
-              <label htmlFor="passwordConfirm"></label>
+                <label htmlFor="passwordConfirm"></label>
                 <input
                   className="rounded-lg"
                   id="passwordConfirm"
@@ -105,46 +109,41 @@ const Signup = (props) => {
                   placeholder="passwordConfirm"
                   value={passwordConfirm}
                   onChange={onChangePasswordConfirm}
-                  />
-                  <p className="text-sm mt-2">{passwordConfirmMessage}</p>
+                />
+                <p className="mt-2 text-sm">{passwordConfirmMessage}</p>
               </div>
             </div>
-            <div className="p-2 w-full">
-            <Form
-              emailChange={emailChange}
-              htmlFor="email"
-              id="email"
-              name="email"
-              sucessMsg="사용 가능한 이메일 입니다."
-              errorMsg="이메일의 형식이 올바르지 않습니다!"
-              reg="2"
+            <div className="w-full p-2">
+              <Form
+                emailChange={emailChange}
+                htmlFor="email"
+                id="email"
+                name="email"
+                sucessMsg="사용 가능한 이메일 입니다."
+                errorMsg="이메일의 형식이 올바르지 않습니다!"
+                reg="2"
               />
-              <p className="text-sm mt-2">{passwordConfirmMessage}</p>
             </div>
-            <div className="p-2 w-full">
+            <div className="w-full p-2">
               <div className="relative">
                 <button
-                  className="text-white bg-black border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                  className="hover:bg-indigo-600 rounded border-0 bg-black py-2 px-8 text-lg text-white focus:outline-none"
                   type="submit"
                   disabled={
-                  isPassword === true &&
-                  isPasswordConfirm === true 
-                  ? false
-                  : true
+                    isPassword === true && isPasswordConfirm === true
+                      ? false
+                      : true
                   }
                   onClick={onClickSignup}
-                  >
+                >
                   Join
-                  </button>
+                </button>
               </div>
             </div>
+          </div>
         </div>
-       </div>
       </div>
-    </div> 
-
-
-    
+    </div>
   );
 };
 
@@ -166,7 +165,7 @@ export default Signup;
 //             <input className="nickname w-[100%] h-14 rounded-lg mb-[80px] bg-gray-light focus:outline-none" placeholder="input post name or content"></input>
 //             <input className="email w-[100%] mb-[80px] border-2" placeholder="input post name or content"></input>
 //             <input className="password w-[100%] border-2" placeholder="input post name or content"></input>
-          
+
 //             <button className="submit w-2/3 mx-auto bg-black text-white h-[40px] ">join</button>
 
 //           </form>

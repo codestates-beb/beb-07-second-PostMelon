@@ -13,7 +13,7 @@ const connect = () => {
   //연결
   mongoose
     .connect(process.env.MONGO_URI, {
-      dbName: process.env.NODE_ENV !== 'production' ? 'gh_test' : 'admin',
+      dbName: process.env.NODE_ENV !== 'production' ? 'final' : 'admin',
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
