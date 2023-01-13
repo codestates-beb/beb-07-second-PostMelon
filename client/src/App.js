@@ -40,7 +40,7 @@ function App() {
           ></Route>
           <Route path="/nftmint" element={<NFTMint />}></Route>
           <Route path="/post" element={<Post />}></Route>
-          <Route path="/postdetail/:id" element={<PostDetail />}></Route>
+          <Route path="/postdetail" element={<PostDetail />}></Route>
           <Route
             path="/writepost"
             element={<WritePost userId={userId} auth={auth} />}

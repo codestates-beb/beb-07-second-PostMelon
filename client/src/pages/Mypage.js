@@ -1,18 +1,28 @@
 import { Link } from "react-router-dom";
-import { userDetailAPI } from "apis/userAPI";
+import { userDetailAPI, ethFaucetAPI } from "apis/userAPI";
 import { useEffect, useState } from "react";
 
 const Mypage = ({ auth, userId }) => {
   const [userInfo, setUserInfo] = useState();
+  const [eth, setEth] = useState();
+  const [token, setToken] = useState();
 
   useEffect(() => {
     userDetailAPI(userId, auth).then((res) => {
       if (res) {
         console.log(res);
         setUserInfo({ ...res.data });
+        setEth(res.data.eth_amount);
+        setToken(res.data.token_amount);
       }
     });
   }, []);
+
+  const faucet = async () => {
+    const res = await ethFaucetAPI(userId, auth);
+    setEth(res.data.slice(-1));
+    console.log(res);
+  };
 
   return (
     <div className="w-[1478] p-[50px]">
@@ -29,12 +39,10 @@ const Mypage = ({ auth, userId }) => {
             : "address : 0x1234567890"}
         </div>
         <div className="ml-10 h-[30px] w-[500px]  text-[16px] text-black">
-          {userInfo
-            ? `token amount : ${userInfo.token_amount} mel`
-            : "no token"}
+          {userInfo ? `token amount : ${token} MEL` : "no token"}
         </div>
         <div className="ml-10 h-[30px] w-[500px]  text-[16px] text-black">
-          {userInfo ? `ether amount : ${userInfo.eth_amount} mel` : "no ether"}
+          {userInfo ? `ether amount : ${eth} ETH` : "no ether"}
         </div>
         <div className="grid place-items-center">
           <button className="text=[20px] rounded border-[1px] border-solid border-black bg-gray-light p-1 text-black drop-shadow-md">
@@ -42,7 +50,10 @@ const Mypage = ({ auth, userId }) => {
           </button>
         </div>
         <div className="mt-5 grid place-items-center">
-          <button className="text=[20px] rounded border-[1px] border-solid border-black bg-gray-light p-1 text-black drop-shadow-md">
+          <button
+            onClick={faucet}
+            className="text=[20px] rounded border-[1px] border-solid border-black bg-gray-light p-1 text-black drop-shadow-md"
+          >
             ether faucet
           </button>
         </div>

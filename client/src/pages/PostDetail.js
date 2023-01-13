@@ -1,6 +1,21 @@
-import { Link } from "react-router-dom";
+import { getPostDetail } from "apis/postsAPI";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const PostDetail = () => {
+  const [post, setPost] = useState();
+
+  const location = useLocation();
+  const postId = location.state.postId;
+
+  useEffect(() => {
+    console.log(postId);
+    getPostDetail(postId).then((res) => {
+      console.log(res.data);
+      setPost(res.data);
+    });
+  }, []);
+
   return (
     <div
       className="mx-auto
@@ -15,7 +30,7 @@ const PostDetail = () => {
   font-semibold
   text-gray"
           >
-            Title
+            {post ? post.title : `title`}
           </div>
         </div>
         <div
@@ -31,7 +46,7 @@ const PostDetail = () => {
   text-gray
   "
           >
-            date
+            {post ? post.created_at.split("T")[0] : `date`}
           </div>
           <div
             className="
@@ -40,7 +55,7 @@ const PostDetail = () => {
   text-gray 
   "
           >
-            writer
+            {post ? post.writer.nickname : "name"}
           </div>
         </div>
 
@@ -55,7 +70,7 @@ const PostDetail = () => {
   text-[24px]
   text-gray"
           >
-            Contents
+            {post ? post.content : "content"}
           </div>
         </div>
         <div
@@ -77,18 +92,23 @@ const PostDetail = () => {
               Coment
             </div>
             <button
-          className="text-slate-300 border-slate-200 flex h-9 w-9 flex-none items-center justify-center rounded-md border"
-          type="button"
-          aria-label="Like"
-        >
-          <svg width="20" height="20" fill="currentColor" aria-hidden="true">
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-            />
-          </svg>
-        </button>
+              className="text-slate-300 border-slate-200 flex h-9 w-9 flex-none items-center justify-center rounded-md border"
+              type="button"
+              aria-label="Like"
+            >
+              <svg
+                width="20"
+                height="20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                />
+              </svg>
+            </button>
           </div>
           <div
             className="h-[80px]

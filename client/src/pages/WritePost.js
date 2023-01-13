@@ -1,7 +1,10 @@
 import { writePost } from "apis/postsAPI";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const WritePost = ({ userId, auth }) => {
+  const navigate = useNavigate();
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
@@ -14,10 +17,9 @@ const WritePost = ({ userId, auth }) => {
   };
 
   const submit = async () => {
-    console.log(userId);
     try {
-      const res = await writePost(title, content, userId, auth);
-      console.log(res);
+      await writePost(title, content, userId, auth);
+      navigate("/post");
     } catch (e) {
       console.log(e);
     }
@@ -51,10 +53,10 @@ const WritePost = ({ userId, auth }) => {
         <div className=" text-[24px] text-black">Contents</div>
       </div>
       <div className="h-[171px] w-[783px]">
-        <input
+        <textarea
           onChange={contentChange}
-          className="h-40 w-11/12 rounded-lg bg-gray-light pl-10 text-gray-dark focus:outline-none"
-        ></input>
+          className="h-40 w-11/12 rounded-lg bg-gray-light p-10 text-gray-dark focus:outline-none"
+        ></textarea>
       </div>
       <button
         onClick={submit}

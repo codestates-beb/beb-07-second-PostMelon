@@ -23,6 +23,10 @@ const Post = () => {
     });
   }, []);
 
+  const goDetail = async (id) => {
+    navigate(`/postdetail`, { state: { postId: id } });
+  };
+
   return (
     <div className="ml-[200px] mr-[200px] min-h-[500px] bg-gray-light p-[30px]">
       <button
@@ -36,17 +40,23 @@ const Post = () => {
           <thead className="border-b-[2px]">
             <tr>
               <th className="col-lg-2 w-1/6">번호</th>
-              <th className="col-lg-8 w-1/2">제목</th>
-              <th className="col-lg-8 w-1/2">닉네임</th>
-              <th className="col-lg-2">작성일자</th>
+              <th className="col-lg-8 w-1/3">제목</th>
+              <th className="col-lg-8 w-1/3">닉네임</th>
+              <th className="col-lg-2 ">작성일자</th>
             </tr>
           </thead>
           <tbody>
             {/* Post.map을 사용해서 반복문 구현 */}
-            {post.map((p) => {
+            {post.map((p, idx) => {
               return (
-                <tr className="text-center" key={p._id}>
-                  <td>{p._id}</td>
+                <tr
+                  className="text-center hover:cursor-pointer"
+                  onClick={() => {
+                    goDetail(p._id);
+                  }}
+                  key={p._id}
+                >
+                  <td>{idx + 1}</td>
                   <td>{p.title}</td>
                   <td>{p.writer.nickname}</td>
                   <td>{p.created_at.split("T")[0]}</td>
